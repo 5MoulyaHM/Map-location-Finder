@@ -1,0 +1,131 @@
+<template>
+    <lightning-card title="Prepaid Card QR Scanner" icon-name="standard:credit_card">
+        <div class="slds-p-around_medium">
+
+            <!-- Already assigned: persists on refresh -->
+            <template if:true={alreadyAssigned}>
+                <div class="slds-notify slds-notify_alert slds-theme_success slds-m-bottom_medium" role="alert">
+                    <lightning-icon icon-name="utility:success" size="small" class="slds-m-right_small"></lightning-icon>
+                    <span>Card already assigned to this merchant</span>
+                </div>
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <label class="slds-form-element__label">Assigned Card ID</label>
+                    <div class="slds-form-element__control">
+                        <lightning-input type="text" value={existingCardId} read-only></lightning-input>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Scan button -->
+            <template if:false={alreadyAssigned}>
+                <template if:false={cardId}>
+                    <template if:false={scanning}>
+                        <div class="slds-align_absolute-center slds-p-vertical_large">
+                            <div class="slds-text-align_center slds-m-bottom_medium">
+                                <lightning-icon icon-name="utility:scan" size="large"></lightning-icon>
+                                <p class="slds-text-heading_small slds-m-top_small">Ready to scan prepaid card</p>
+                            </div>
+                            <lightning-button
+                                variant="brand"
+                                label="Open Camera & Scan"
+                                icon-name="utility:camera"
+                                onclick={startScan}>
+                            </lightning-button>
+                        </div>
+                    </template>
+                </template>
+            </template>
+
+            <!-- DESKTOP: live webcam view -->
+            <template if:true={scanning}>
+                <div class="camera-container">
+                    <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small slds-text-align_center">
+                        Hold the QR code in front of your webcam inside the blue box
+                    </p>
+                    <div class="video-wrapper">
+                        <video lwc:ref="videoEl" autoplay playsinline muted class="video-feed"></video>
+                        <div class="scan-overlay">
+                            <div class="scan-frame">
+                                <div class="corner top-left"></div>
+                                <div class="corner top-right"></div>
+                                <div class="corner bottom-left"></div>
+                                <div class="corner bottom-right"></div>
+                            </div>
+                            <div class="scan-line"></div>
+                        </div>
+                    </div>
+                    <canvas lwc:ref="canvasEl" class="slds-hide"></canvas>
+                    <div class="slds-m-top_medium slds-text-align_center">
+                        <lightning-button
+                            variant="destructive-text"
+                            label="Cancel"
+                            icon-name="utility:close"
+                            onclick={resetScanner}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Validating spinner -->
+            <template if:true={validating}>
+                <div class="slds-align_absolute-center slds-p-vertical_medium">
+                    <lightning-spinner alternative-text="Validating..." size="medium"></lightning-spinner>
+                    <p class="slds-text-body_small slds-text-color_weak slds-m-top_large">Validating card...</p>
+                </div>
+            </template>
+
+            <!-- Scanned result -->
+            <template if:true={cardId}>
+                <template if:true={cardValid}>
+                    <div class="slds-notify slds-notify_alert slds-theme_success slds-m-bottom_medium" role="alert">
+                        <lightning-icon icon-name="utility:success" size="small" class="slds-m-right_small"></lightning-icon>
+                        <span>Card ID captured and validated!</span>
+                    </div>
+                </template>
+
+                <template if:true={cardInvalid}>
+                    <div class="slds-notify slds-notify_alert slds-theme_error slds-m-bottom_medium" role="alert">
+                        <lightning-icon icon-name="utility:error" size="small" class="slds-m-right_small"></lightning-icon>
+                        <span>{validationMessage}</span>
+                    </div>
+                </template>
+
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <label class="slds-form-element__label">Scanned Card ID</label>
+                    <div class="slds-form-element__control">
+                        <lightning-input type="text" value={cardId} read-only></lightning-input>
+                    </div>
+                </div>
+
+                <div class="slds-button-group">
+                    <lightning-button
+                        variant="brand"
+                        label="Confirm & Save"
+                        icon-name="utility:save"
+                        onclick={saveCardId}
+                        disabled={cardInvalid}
+                        class="slds-m-right_small">
+                    </lightning-button>
+                    <lightning-button
+                        variant="neutral"
+                        label="Scan Again"
+                        icon-name="utility:refresh"
+                        onclick={resetScanner}>
+                    </lightning-button>
+                </div>
+            </template>
+
+            <!-- Error -->
+            <template if:true={errorMessage}>
+                <div class="slds-notify slds-notify_alert slds-theme_error slds-m-top_medium" role="alert">
+                    <lightning-icon icon-name="utility:error" size="small" class="slds-m-right_small"></lightning-icon>
+                    <span>{errorMessage}</span>
+                </div>
+                <div class="slds-m-top_small">
+                    <lightning-button variant="neutral" label="Try Again" onclick={resetScanner}></lightning-button>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
