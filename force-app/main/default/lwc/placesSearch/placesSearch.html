@@ -1,0 +1,161 @@
+<template>
+    <div class="container">
+
+        <!-- ==================== SCREEN 1: Map + Search ==================== -->
+        <template if:false={showDetailsScreen}>
+
+            <div class="header">
+                <lightning-icon icon-name="utility:chevronleft" size="small"></lightning-icon>
+                <span class="header-title">Operating Location</span>
+            </div>
+
+            <p class="subtitle">Please ensure your business address is accurate and easy to locate for POS delivery.</p>
+
+            <!-- Search bar -->
+            <div class="search-bar-container">
+                <div class="search-overlay">
+                    <lightning-icon icon-name="utility:search" size="x-small"></lightning-icon>
+                    <input
+                        type="text"
+                        class="search-input"
+                        placeholder="Search for a location"
+                        value={searchQuery}
+                        oninput={handleInput}
+                    />
+                </div>
+
+                <template if:true={showResults}>
+                    <div class="results-dropdown">
+                        <template for:each={searchResults} for:item="place">
+                            <div
+                                key={place.address}
+                                class="result-item"
+                                data-address={place.address}
+                                data-lat={place.lat}
+                                data-lng={place.lng}
+                                data-name={place.name}
+                                onclick={handleSelectPlace}
+                            >
+                                <lightning-icon icon-name="utility:location" size="x-small"></lightning-icon>
+                                <div class="result-text">
+                                    <p class="result-name">{place.name}</p>
+                                    <p class="result-address">{place.address}</p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Map wrapper -->
+            <div class="map-wrapper">
+                <!-- lightning-map gets explicit height via inline style from JS -->
+                <lightning-map
+                    map-markers={activeMarkers}
+                    zoom-level={zoomLevel}
+                    show-footer={showFooter}
+                    style={mapStyle}
+                ></lightning-map>
+
+                <!-- White bar to cover Google footer -->
+                <div class="footer-blocker"></div>
+            </div>
+
+            <!-- Use Current Location — outside map, in normal flow -->
+            <div class="current-location-btn" onclick={handleCurrentLocation}>
+                <lightning-icon icon-name="utility:target" size="x-small"></lightning-icon>
+                <span>Use current location</span>
+            </div>
+
+            <!-- Selected Address Card -->
+            <template if:true={selectedPlace}>
+                <div class="address-card">
+                    <lightning-icon icon-name="utility:location" size="small"></lightning-icon>
+                    <div class="card-text">
+                        <p class="card-name">{selectedPlace.name}</p>
+                        <p class="card-address">{selectedPlace.address}</p>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Error -->
+            <template if:true={errorMessage}>
+                <p class="error-msg">{errorMessage}</p>
+            </template>
+
+            <!-- CTA -->
+            <div class="cta-bar">
+                <button class="confirm-btn" onclick={handleConfirm}>Confirm Location</button>
+            </div>
+
+        </template>
+
+        <!-- ==================== SCREEN 2: Details Form ==================== -->
+        <template if:true={showDetailsScreen}>
+
+            <div class="header">
+                <span class="back-btn" onclick={handleBack}>
+                    <lightning-icon icon-name="utility:chevronleft" size="small"></lightning-icon>
+                </span>
+                <span class="header-title">Operating Location</span>
+            </div>
+
+            <p class="subtitle">Please ensure your business address is accurate and easy to locate for POS delivery.</p>
+
+            <div class="progress-track">
+                <div class="progress-fill"></div>
+            </div>
+
+            <div class="form-body">
+
+                <div class="selected-location-card">
+                    <div class="selected-left">
+                        <lightning-icon icon-name="utility:location" size="small" class="loc-icon"></lightning-icon>
+                        <div>
+                            <p class="selected-label">Selected Location</p>
+                            <p class="selected-name">{selectedPlace.name}</p>
+                            <p class="selected-addr">{selectedPlace.address}</p>
+                        </div>
+                    </div>
+                    <span class="change-link" onclick={handleBack}>Change Location</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Operating Address</label>
+                    <input type="text" class="form-input" placeholder="e.g. Villa 12, Apt 4B"
+                        value={operatingAddress} oninput={handleAddressInput} />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Floor <span class="optional">(Optional)</span></label>
+                    <input type="text" class="form-input" placeholder="e.g. 4"
+                        value={floor} oninput={handleFloorInput} />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Additional Direction <span class="optional">(Optional)</span></label>
+                    <textarea class="form-textarea" oninput={handleDirectionInput}></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Upload Proof of Address <span class="optional">(Ejari or Tenancy Contract)</span></label>
+                    <div class="upload-box" onclick={handleUploadClick}>
+                        <lightning-icon icon-name="doctype:attachment" size="medium"></lightning-icon>
+                        <p class="upload-label">Proof of Address</p>
+                        <input type="file" class="file-input" onchange={handleFileChange} />
+                    </div>
+                    <template if:true={uploadedFileName}>
+                        <p class="file-name">✓ {uploadedFileName}</p>
+                    </template>
+                </div>
+
+            </div>
+
+            <div class="cta-bar">
+                <button class="confirm-btn" onclick={handleSubmit}>Continue</button>
+            </div>
+
+        </template>
+
+    </div>
+</template>
