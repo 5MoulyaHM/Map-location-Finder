@@ -1,0 +1,372 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px 6px;
+    gap: 10px;
+}
+
+.header-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.back-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #666;
+    padding: 0 16px 0;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.error-msg {
+    color: #c23934;
+    font-size: 12px;
+    padding: 6px 16px;
+    margin: 0;
+    background: #fff;
+}
+
+.cta-bar {
+    padding: 12px 16px 20px;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+.confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background: #0176d3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+}
+
+.confirm-btn:hover { background: #0165b8; }
+.confirm-btn:active { background: #014f9a; }
+
+/* Search bar */
+.search-bar-container {
+    position: relative;
+    z-index: 50;
+    background: #fff;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-overlay {
+    background: #f3f3f3;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 9px 12px;
+    gap: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    background: transparent;
+}
+
+.search-input::placeholder { color: #aaa; }
+
+.results-dropdown {
+    position: absolute;
+    top: calc(100% - 10px);
+    left: 12px;
+    right: 12px;
+    z-index: 100;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    max-height: 240px;
+    overflow-y: auto;
+    border: 1px solid #e8e8e8;
+}
+
+.result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.result-item:hover { background: #f5f5f5; }
+.result-item:last-child { border-bottom: none; }
+.result-text { flex: 1; }
+
+.result-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.result-address {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0;
+}
+
+/* Map wrapper — same height as lightning-map (500px) */
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: #e8e8e8;
+}
+
+/* Footer blocker covers Google attribution */
+.footer-blocker {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: #fff;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.current-location-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0176d3;
+    white-space: nowrap;
+}
+
+.address-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-top: 1px solid #eee;
+    background: #fff;
+}
+
+.card-text { flex: 1; }
+
+.card-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.card-address {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0;
+}
+
+/* Screen 2 */
+.progress-track {
+    height: 3px;
+    background: #e8e8e8;
+    margin: 8px 16px 20px;
+    border-radius: 2px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 37.5%;
+    background: #2ecc71;
+    border-radius: 2px;
+}
+
+.form-body {
+    padding: 0 16px 16px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.selected-location-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    gap: 10px;
+}
+
+.selected-left {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.loc-icon { flex-shrink: 0; margin-top: 2px; }
+
+.selected-label {
+    font-size: 11px;
+    color: #888;
+    margin: 0 0 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.selected-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.selected-addr {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0;
+    line-height: 1.4;
+}
+
+.change-link {
+    font-size: 12px;
+    color: #0176d3;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
+    padding-top: 2px;
+    flex-shrink: 0;
+}
+
+.change-link:hover { text-decoration: underline; }
+
+.form-group { margin-bottom: 20px; }
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.optional { font-weight: 400; color: #888; }
+
+.form-input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #333;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: #0176d3;
+    box-shadow: 0 0 0 2px rgba(1,118,211,0.15);
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #333;
+    outline: none;
+    min-height: 90px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.form-textarea:focus {
+    border-color: #0176d3;
+    box-shadow: 0 0 0 2px rgba(1,118,211,0.15);
+}
+
+.upload-box {
+    border: 1.5px dashed #c8c8c8;
+    border-radius: 8px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: #fafafa;
+}
+
+.upload-box:hover {
+    border-color: #0176d3;
+    background: #f0f7ff;
+}
+
+.upload-label { font-size: 13px; color: #888; margin: 0; }
+.file-input { display: none; }
+
+.file-name {
+    font-size: 12px;
+    color: #2ecc71;
+    margin: 6px 0 0;
+    font-weight: 500;
+}
+
+.card-coords {
+    font-size: 11px;
+    color: #aaa;
+    margin: 2px 0 0;
+}
+
+.selected-coords {
+    font-size: 11px;
+    color: #aaa;
+    margin: 3px 0 0;
+}
+
+.success-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #e8f5e9;
+    border: 1px solid #2ecc71;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 0 16px 16px;
+    font-size: 13px;
+    color: #1a7a3a;
+    font-weight: 500;
+}
+
+.confirm-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
