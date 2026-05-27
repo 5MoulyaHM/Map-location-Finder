@@ -3,6 +3,7 @@
     <apiVersion>59.0</apiVersion>
     <isExposed>true</isExposed>
     <targets>
+<<<<<<< HEAD
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
@@ -12,4 +13,10 @@
             <property name="recordId" type="String" datasource="@salesforce/schema/Contact.Id" />
         </targetConfig>
     </targetConfigs>
+=======
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
 </LightningComponentBundle>

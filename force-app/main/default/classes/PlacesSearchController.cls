@@ -28,16 +28,29 @@ public with sharing class PlacesSearchController {
                         Map<String, Object> displayName = (Map<String, Object>) p.get('displayName');
                         Map<String, Object> location = (Map<String, Object>) p.get('location');
 
+<<<<<<< HEAD
+=======
+                        // Skip if critical fields missing
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                         if (displayName == null || location == null) continue;
 
                         Map<String, String> placeData = new Map<String, String>();
                         placeData.put('name', (String) displayName.get('text'));
+<<<<<<< HEAD
                         placeData.put('address', p.get('formattedAddress') != null ? (String) p.get('formattedAddress') : '');
+=======
+                        placeData.put('address', p.get('formattedAddress') != null
+                            ? (String) p.get('formattedAddress') : '');
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                         placeData.put('lat', String.valueOf(location.get('latitude')));
                         placeData.put('lng', String.valueOf(location.get('longitude')));
                         results.add(placeData);
 
                     } catch (Exception e) {
+<<<<<<< HEAD
+=======
+                        // Skip any individual record that fails to parse
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                         System.debug('Skipping place record: ' + e.getMessage());
                     }
                 }
@@ -46,6 +59,7 @@ public with sharing class PlacesSearchController {
 
         return results;
     }
+<<<<<<< HEAD
 
     @AuraEnabled
     public static void saveLocationToContact(
@@ -105,4 +119,6 @@ public with sharing class PlacesSearchController {
             throw new AuraHandledException('Error uploading file: ' + e.getMessage());
         }
     }
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
 }

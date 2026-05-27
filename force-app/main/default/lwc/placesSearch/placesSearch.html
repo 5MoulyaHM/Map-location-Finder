@@ -47,18 +47,33 @@
                 </template>
             </div>
 
+<<<<<<< HEAD
             <!-- Map -->
             <div class="map-wrapper">
+=======
+            <!-- Map wrapper -->
+            <div class="map-wrapper">
+                <!-- lightning-map gets explicit height via inline style from JS -->
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                 <lightning-map
                     map-markers={activeMarkers}
                     zoom-level={zoomLevel}
                     show-footer={showFooter}
                     style={mapStyle}
                 ></lightning-map>
+<<<<<<< HEAD
                 <div class="footer-blocker"></div>
             </div>
 
             <!-- Use Current Location -->
+=======
+
+                <!-- White bar to cover Google footer -->
+                <div class="footer-blocker"></div>
+            </div>
+
+            <!-- Use Current Location — outside map, in normal flow -->
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
             <div class="current-location-btn" onclick={handleCurrentLocation}>
                 <lightning-icon icon-name="utility:target" size="x-small"></lightning-icon>
                 <span>Use current location</span>
@@ -71,7 +86,10 @@
                     <div class="card-text">
                         <p class="card-name">{selectedPlace.name}</p>
                         <p class="card-address">{selectedPlace.address}</p>
+<<<<<<< HEAD
                         <p class="card-coords">Lat: {selectedLat} | Lng: {selectedLng}</p>
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                     </div>
                 </div>
             </template>
@@ -104,6 +122,7 @@
                 <div class="progress-fill"></div>
             </div>
 
+<<<<<<< HEAD
             <!-- Success banner -->
             <template if:true={saveSuccess}>
                 <div class="success-banner">
@@ -112,6 +131,8 @@
                 </div>
             </template>
 
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
             <div class="form-body">
 
                 <div class="selected-location-card">
@@ -121,7 +142,10 @@
                             <p class="selected-label">Selected Location</p>
                             <p class="selected-name">{selectedPlace.name}</p>
                             <p class="selected-addr">{selectedPlace.address}</p>
+<<<<<<< HEAD
                             <p class="selected-coords">Lat: {selectedLat} | Lng: {selectedLng}</p>
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                         </div>
                     </div>
                     <span class="change-link" onclick={handleBack}>Change Location</span>
@@ -156,6 +180,7 @@
                     </template>
                 </div>
 
+<<<<<<< HEAD
                 <!-- Error -->
                 <template if:true={errorMessage}>
                     <p class="error-msg">{errorMessage}</p>
@@ -168,6 +193,12 @@
                     <template if:false={isSaving}>Continue</template>
                     <template if:true={isSaving}>Saving...</template>
                 </button>
+=======
+            </div>
+
+            <div class="cta-bar">
+                <button class="confirm-btn" onclick={handleSubmit}>Continue</button>
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
             </div>
 
         </template>

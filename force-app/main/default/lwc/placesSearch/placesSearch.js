@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { LightningElement, track, api } from 'lwc';
 import searchPlaces       from '@salesforce/apex/PlacesSearchController.searchPlaces';
 import saveLocationToContact from '@salesforce/apex/PlacesSearchController.saveLocationToContact';
@@ -7,6 +8,13 @@ export default class PlacesSearch extends LightningElement {
 
     @api recordId; // Contact Id — auto-populated on Contact record page
 
+=======
+import { LightningElement, track } from 'lwc';
+import searchPlaces from '@salesforce/apex/PlacesSearchController.searchPlaces';
+
+export default class PlacesSearch extends LightningElement {
+
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
     @track searchQuery = '';
     @track searchResults = [];
     @track mapMarkers = null;
@@ -14,14 +22,18 @@ export default class PlacesSearch extends LightningElement {
     @track errorMessage = '';
     @track showResults = false;
     @track showDetailsScreen = false;
+<<<<<<< HEAD
     @track isSaving = false;
     @track saveSuccess = false;
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
 
     @track operatingAddress = '';
     @track floor = '';
     @track additionalDirection = '';
     @track uploadedFileName = '';
 
+<<<<<<< HEAD
     // File data
     fileBase64 = null;
     fileType = null;
@@ -35,6 +47,13 @@ export default class PlacesSearch extends LightningElement {
     selectedLat = null;
     selectedLng = null;
 
+=======
+    // Fixed 500px — reliable across all Salesforce page types
+    mapStyle = 'height:100%;width:100%;display:block;';
+    showFooter = false;
+    zoomLevel = 14;
+
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
     defaultMarkers = [
         { location: { Latitude: 25.2048, Longitude: 55.2708 } }
     ];
@@ -76,9 +95,12 @@ export default class PlacesSearch extends LightningElement {
         const lng     = parseFloat(event.currentTarget.dataset.lng);
 
         this.selectedPlace = { name, address };
+<<<<<<< HEAD
         this.selectedLat = lat;
         this.selectedLng = lng;
 
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
         this.mapMarkers = [
             {
                 location: { Latitude: lat, Longitude: lng },
@@ -96,8 +118,11 @@ export default class PlacesSearch extends LightningElement {
                 (position) => {
                     const lat = position.coords.latitude;
                     const lng = position.coords.longitude;
+<<<<<<< HEAD
                     this.selectedLat = lat;
                     this.selectedLng = lng;
+=======
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
                     this.mapMarkers = [
                         { location: { Latitude: lat, Longitude: lng }, title: 'Current Location' }
                     ];
@@ -127,7 +152,11 @@ export default class PlacesSearch extends LightningElement {
     }
 
     handleAddressInput(event) { this.operatingAddress = event.target.value; }
+<<<<<<< HEAD
     handleFloorInput(event)   { this.floor = event.target.value; }
+=======
+    handleFloorInput(event) { this.floor = event.target.value; }
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
     handleDirectionInput(event) { this.additionalDirection = event.target.value; }
 
     handleUploadClick() {
@@ -136,6 +165,7 @@ export default class PlacesSearch extends LightningElement {
 
     handleFileChange(event) {
         const file = event.target.files[0];
+<<<<<<< HEAD
         if (!file) return;
 
         this.uploadedFileName = file.name;
@@ -188,6 +218,18 @@ export default class PlacesSearch extends LightningElement {
         .catch(error => {
             this.isSaving = false;
             this.errorMessage = 'Error saving: ' + (error.body ? error.body.message : error.message);
+=======
+        if (file) this.uploadedFileName = file.name;
+    }
+
+    handleSubmit() {
+        console.log('Submitting:', {
+            location: this.selectedPlace,
+            operatingAddress: this.operatingAddress,
+            floor: this.floor,
+            additionalDirection: this.additionalDirection,
+            file: this.uploadedFileName
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
         });
     }
 }

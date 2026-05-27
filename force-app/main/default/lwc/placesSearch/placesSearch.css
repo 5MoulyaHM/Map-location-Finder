@@ -340,6 +340,7 @@
     font-weight: 500;
 }
 
+<<<<<<< HEAD
 .card-coords {
     font-size: 11px;
     color: #aaa;
@@ -369,4 +370,8 @@
 .confirm-btn:disabled {
     background: #aaa;
     cursor: not-allowed;
+=======
+.slds-map_container{
+    height: 100%;
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
 }

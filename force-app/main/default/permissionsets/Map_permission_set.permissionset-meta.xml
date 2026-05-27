@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+<<<<<<< HEAD
+=======
+    <externalCredentialPrincipalAccesses>
+        <enabled>true</enabled>
+        <externalCredentialPrincipal>Google_Places_External_Cred-GooglePlacesPrincipal</externalCredentialPrincipal>
+    </externalCredentialPrincipalAccesses>
+>>>>>>> c46ce70c2770fb0e2fe5ba3d083b78b242634dbb
     <hasActivationRequired>false</hasActivationRequired>
     <label>Map permission set</label>
 </PermissionSet>
